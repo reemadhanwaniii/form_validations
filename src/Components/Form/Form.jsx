@@ -5,11 +5,13 @@ import validateEmail from '../../Helper/emailValidator';
 
 function Form() {
     
-const exampleRef = useRef("abc");
+const exampleRef = useRef(0);
+
+const [count,setCount] = useState(0);
 
 useEffect(()=>{
     console.log(exampleRef);
-},[]);
+},[count]);
 
 const [formValues,setFormValues] = useState({
     email : "",
@@ -40,6 +42,14 @@ const handleValidateEmail = () => {
 return(
     <div>
         New Form
+
+        Count : {count}
+        <br/>
+        ExampleRef : {exampleRef.current}
+        <br/>
+        <button onClick={() => setCount(count+1)}>Update Count</button>
+        <br/>
+        <button onClick={() => exampleRef.current++}>Update Ref</button>
         <form onSubmit={handleFormSubmit}>
             <div className="wrapper email-wrapper">
                 <input 
