@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Form.css';
 import validatePassword from '../../Helper/passwordValidator';
 import validateEmail from '../../Helper/emailValidator';
 
 function Form() {
+    
+const exampleRef = useRef("abc");
+
+useEffect(()=>{
+    console.log(exampleRef);
+},[]);
 
 const [formValues,setFormValues] = useState({
     email : "",
