@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import './Form.css';
 import validatePassword from '../../Helper/passwordValidator';
 import validateEmail from '../../Helper/emailValidator';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 function Form() {
-    
-const exampleRef = useRef(0);
 
-const [count,setCount] = useState(0);
+const emailRef = useRef(null); //using this variable we will be able to access input element {email} in same way we do as document.getElementById
 
 useEffect(()=>{
-    console.log(exampleRef);
-},[count]);
+    console.log(emailRef.current);
+}) // it is referring email element
 
 const [formValues,setFormValues] = useState({
     email : "",
@@ -34,6 +34,7 @@ const handleValidatePassword = () =>{
 const handleValidateEmail = () => {
     const email = formValues.email;
     if(!validateEmail(email)){
+        emailRef.current.focus();
         console.log("email doesn't contain valid parameters")
         //document.getElementById('email-input').focus();
     }
@@ -42,20 +43,13 @@ const handleValidateEmail = () => {
 return(
     <div>
         New Form
-
-        Count : {count}
-        <br/>
-        ExampleRef : {exampleRef.current}
-        <br/>
-        <button onClick={() => setCount(count+1)}>Update Count</button>
-        <br/>
-        <button onClick={() => exampleRef.current++}>Update Ref</button>
         <form onSubmit={handleFormSubmit}>
             <div className="wrapper email-wrapper">
                 <input 
                     id="email-input"
                     type="text" 
                     value={formValues.email}
+                    ref={emailRef}
                     onChange={(event) => setFormValues({...formValues,email:event.target.value})}
                 />
             </div> 
