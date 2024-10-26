@@ -9,9 +9,7 @@ function Form() {
 
 const emailRef = useRef(null); //using this variable we will be able to access input element {email} in same way we do as document.getElementById
 
-useEffect(()=>{
-    console.log(emailRef.current);
-}) // it is referring email element
+
 
 const [formValues,setFormValues] = useState({
     email : "",
@@ -35,6 +33,7 @@ const handleValidateEmail = () => {
     const email = formValues.email;
     if(!validateEmail(email)){
         emailRef.current.focus();
+        console.log(emailRef.current.value); //now we are able to access all properties of DOM (like we do in dom api we are able to access it)
         console.log("email doesn't contain valid parameters")
         //document.getElementById('email-input').focus();
     }
