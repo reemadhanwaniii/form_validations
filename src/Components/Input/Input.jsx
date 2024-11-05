@@ -1,7 +1,8 @@
+import React from "react";
 import { useContext, useState } from "react";
 import { FormContext } from "../Providers/formContext";
 
-function Input({type, id, label, inputRef}) {
+const Input = React.forwardRef(({type, id, label}, ref) => {
 
   const {formInput,setFormInput} = useContext(FormContext)
   const [text,setText] = useState("");
@@ -10,7 +11,7 @@ function Input({type, id, label, inputRef}) {
         <input
             type={type}
             id={id}
-            ref={inputRef}
+            ref={ref}
             value={text}
             onChange={(e) => {
                 setText(e.target.value);
@@ -20,6 +21,6 @@ function Input({type, id, label, inputRef}) {
         />
     </>
   );
-}
+});
 
 export default Input;

@@ -27,7 +27,7 @@ return(
                     type="email" 
                     id="email-input" 
                     label="email" 
-                    inputRef={emailRef} //for user-defined component we can't directly passed ref here
+                    ref={emailRef} 
                 />
             </div> 
             <div className="wrapper password-wrapper">
@@ -35,7 +35,7 @@ return(
                     type="password" 
                     id="password-input" 
                     label="password"
-                    inputRef={passwordRef}
+                    ref={passwordRef}
                 /> 
             </div>
             <button>Submit</button>
