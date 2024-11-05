@@ -2,6 +2,8 @@ import './Form.css';
 import Input from '../Input/Input';
 import { useContext, useRef } from 'react';
 import { FormContext } from '../Providers/formContext';
+import validateEmail from '../../Helper/emailValidator';
+import validatePassword from '../../Helper/passwordValidator';
 
 function Form() {
 
@@ -11,12 +13,14 @@ const passwordRef = useRef(null);
 
 const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log(formInput);
-        //we have access to formInput that means validation can occur here
-        console.log(emailRef.current);
-        emailRef.current.setInvalid();
-        passwordRef.current.setInvalid();
-        emailRef.current.shake();
+        if(!validateEmail(formInput.email)){
+            emailRef.current.setInvalid();
+            emailRef.current.shake();
+        }
+        if(!validatePassword(formInput.password)){
+            passwordRef.current.setInvalid();
+            passwordRef.current.shake();
+        }
 }
 
 

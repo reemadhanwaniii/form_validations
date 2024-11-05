@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef } from "react";
+import React, { useEffect, useImperativeHandle, useRef } from "react";
 import { useContext, useState } from "react";
 import { FormContext } from "../Providers/formContext";
 import './Input.css'
@@ -12,6 +12,11 @@ const Input = React.forwardRef(({type, id, label}, ref) => {
 
  //introduce a local Ref // local Ref means local to a component
  const localRef = useRef(null);
+
+ useEffect(()=>{
+    setISValid(true);
+    setShake(false);
+ },[text]);
  
  useImperativeHandle(ref,()=>
     {
@@ -37,6 +42,7 @@ const Input = React.forwardRef(({type, id, label}, ref) => {
              }
             }
         />
+        <span><br/>{ (!isValid)? `${label} is invalid` : ""}</span>
     </>
   );
 });
