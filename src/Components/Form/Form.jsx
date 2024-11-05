@@ -13,7 +13,9 @@ const handleFormSubmit = (event) => {
         event.preventDefault();
         console.log(formInput);
         //we have access to formInput that means validation can occur here
-        emailRef.current.focus(); //assume form is not validated
+        console.log(emailRef.current);
+        emailRef.current.setInvalid();
+        passwordRef.current.setInvalid();
 }
 
 
