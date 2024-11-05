@@ -1,66 +1,29 @@
-import { useState } from 'react';
 import './Form.css';
-import validatePassword from '../../Helper/passwordValidator';
-import validateEmail from '../../Helper/emailValidator';
-import { useRef } from 'react';
-import { useEffect } from 'react';
+import Input from '../Input/Input';
+import { useContext } from 'react';
+import { FormContext } from '../Providers/formContext';
 
 function Form() {
 
-const emailRef = useRef(null); //using this variable we will be able to access input element {email} in same way we do as document.getElementById
-const passwordRef = useRef(null);
+const {formInput} = useContext(FormContext);
 
-
-const [formValues,setFormValues] = useState({
-    email : "",
-    password : ""
-});
 
 const handleFormSubmit = (event) => {
         event.preventDefault();
-        handleValidateEmail();
-        handleValidatePassword();
+        console.log(formInput);
 }
 
-const handleValidatePassword = () =>{
-    const password = formValues.password;
-    if(!validatePassword(password)){
-        passwordRef.current.focus();
-        console.log("password doesn't contain valid parameters")
-    }
-}
 
-const handleValidateEmail = () => {
-    const email = formValues.email;
-    if(!validateEmail(email)){
-        emailRef.current.focus();
-        //console.log(emailRef.current.value); //now we are able to access all properties of DOM (like we do in dom api we are able to access it)
-        console.log("email doesn't contain valid parameters")
-        //document.getElementById('email-input').focus();
-    }
-}
 
 return(
     <div>
         New Form
         <form onSubmit={handleFormSubmit}>
             <div className="wrapper email-wrapper">
-                <input 
-                    id="email-input"
-                    type="text" 
-                    value={formValues.email}
-                    ref={emailRef}
-                    onChange={(event) => setFormValues({...formValues,email:event.target.value})}
-                />
+                <Input type="text" id="email-input" label="email"/>
             </div> 
             <div className="wrapper password-wrapper">
-                <input 
-                    id="password-input"
-                    type="password" 
-                    ref={passwordRef}
-                    value={formValues.password}
-                    onChange={(event) => setFormValues({...formValues,password:event.target.value})}
-                />
+                <Input type="password" id="password-input" label="password"/> 
             </div>
             <button>Submit</button>
         </form>
