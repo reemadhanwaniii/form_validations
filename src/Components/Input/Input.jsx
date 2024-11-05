@@ -7,6 +7,7 @@ const Input = React.forwardRef(({type, id, label}, ref) => {
 
   const {formInput,setFormInput} = useContext(FormContext)
   const [isValid,setISValid] = useState(true);
+  const [shake,setShake] = useState(false);
   const [text,setText] = useState("");
 
  //introduce a local Ref // local Ref means local to a component
@@ -17,14 +18,15 @@ const Input = React.forwardRef(({type, id, label}, ref) => {
         //console.log(localRef)
         return {
             focus: () => localRef.current.focus(),
-            setInvalid: () => setISValid(false)
+            setInvalid: () => setISValid(false),
+            shake: () => setShake(true),
         }
     },[]);
 
   return(
     <>
         <input 
-            className={(!isValid)?"error-input":""}
+            className={`${(!isValid)?"error-input":""} ${(shake)? 'shake' : ''}`}
             type={type}
             id={id}
             ref={localRef}

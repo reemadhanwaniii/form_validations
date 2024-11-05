@@ -16,6 +16,7 @@ const handleFormSubmit = (event) => {
         console.log(emailRef.current);
         emailRef.current.setInvalid();
         passwordRef.current.setInvalid();
+        emailRef.current.shake();
 }
 
 
