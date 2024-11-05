@@ -13,17 +13,23 @@ const passwordRef = useRef(null);
 
 const handleFormSubmit = (event) => {
         event.preventDefault();
-        if(!validateEmail(formInput.email)){
-            emailRef.current.setInvalid();
-            emailRef.current.shake();
-        }
-        if(!validatePassword(formInput.password)){
-            passwordRef.current.setInvalid();
-            passwordRef.current.shake();
-        }
+        handleInvalidEmail();
+        handleInvalidPassword();
 }
 
+const handleInvalidEmail = () => {
+    if(!validateEmail(formInput.email)){
+        emailRef.current.setInvalid();
+        emailRef.current.shake();
+    }
+}
 
+const handleInvalidPassword = () => {
+    if(!validatePassword(formInput.password)){
+        passwordRef.current.setInvalid();
+        passwordRef.current.shake();
+    }
+}
 
 return(
     <div>
@@ -35,6 +41,7 @@ return(
                     id="email-input" 
                     label="email" 
                     ref={emailRef} 
+                    checkOnBlur={handleInvalidEmail}
                 />
             </div> 
             <div className="wrapper password-wrapper">
@@ -43,6 +50,7 @@ return(
                     id="password-input" 
                     label="password"
                     ref={passwordRef}
+                    checkOnBlur={handleInvalidPassword}
                 /> 
             </div>
             <button>Submit</button>

@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { FormContext } from "../Providers/formContext";
 import './Input.css'
 
-const Input = React.forwardRef(({type, id, label}, ref) => {
+const Input = React.forwardRef(({type, id, label, checkOnBlur}, ref) => {
 
   const {formInput,setFormInput} = useContext(FormContext)
   const [isValid,setISValid] = useState(true);
@@ -36,6 +36,7 @@ const Input = React.forwardRef(({type, id, label}, ref) => {
             id={id}
             ref={localRef}
             value={text}
+            onBlur={checkOnBlur}
             onChange={(e) => {
                 setText(e.target.value);
                 setFormInput({...formInput,[label]: e.target.value})
